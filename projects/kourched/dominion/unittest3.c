@@ -17,7 +17,7 @@ int checkCardEffectCutPurse(struct gameState *state) {
     // Execute Cut Purse Card
     cardEffectCutPurse(handPos, currentPlayer, state);
 
-    int postGold = initialGold + 1;
+    int postGold = initialGold + 2;
 
     // Bug Error: Invalid 'i' and 'j' loop values cause misplaced gold
     assert(initialGold != postGold);

@@ -7,7 +7,7 @@
 #include "assert.h"
 
 /**
- * Expect Minion Card to add +2 coins for choice==1 for currentPlayer.
+ * Expect Stweard Card to add +2 coins for choice==1 for currentPlayer.
  */
 int checkCardEffectSteward(int card, struct gameState *state) {
     int choice1 = 1, choice2 = 0, choice3 = 0;
