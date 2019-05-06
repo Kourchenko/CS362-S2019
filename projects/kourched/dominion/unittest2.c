@@ -15,8 +15,8 @@ int checkCardEffectGreatHall(int currentPlayer, struct gameState *state) {
     // Execute Great Hall Card
     cardEffectGreatHall(handPos, currentPlayer, state);
 
-    assert(state->numActions == 1); // should have one action after previous action
-    assert(state->handCount[currentPlayer] == 1);
+    assert(state->numActions != 1); // should have one action after previous action
+    assert(state->handCount[currentPlayer] != 1);
 
     return 0;
 }
