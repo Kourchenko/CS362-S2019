@@ -674,7 +674,7 @@ int cardEffectSmithy(int handPos, int currentPlayer, struct gameState *state) {
   int i = 0;
 
   //+3 Cards
-  for (i = 0; i <= 3; i++) {
+  for (i = 0; i < 3; i++) {
     drawCard(currentPlayer, state);
   }
   
