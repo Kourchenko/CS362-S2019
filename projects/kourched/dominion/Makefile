@@ -50,6 +50,22 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs
 	./unittest4 >> unittestresults.out
 	gcov unittest4.c >> unittestresults.out
 
+	gcc -o cardTest1 -g cardTest1.c dominion.o rngs.o $(CFLAGS)
+	./cardTest1 >> unittestresults.out
+	gcov cardTest1.c >> unittestresults.out
+
+	gcc -o cardTest2 -g cardTest2.c dominion.o rngs.o $(CFLAGS)
+	./cardTest2 >> unittestresults.out
+	gcov cardTest2.c >> unittestresults.out
+
+	gcc -o cardTest3 -g cardTest3.c dominion.o rngs.o $(CFLAGS)
+	./cardTest3 >> unittestresults.out
+	gcov cardTest3.c >> unittestresults.out
+
+	gcc -o cardTest4 -g cardTest4.c dominion.o rngs.o $(CFLAGS)
+	./cardTest4 >> unittestresults.out
+	gcov cardTest4.c >> unittestresults.out
+
 player: player.c interface.o
 	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
 
