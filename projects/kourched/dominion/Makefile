@@ -34,17 +34,14 @@ unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs
 	echo "unittest1.c" > unittestresults.out
 	./unittest1 >> unittestresults.out
 	gcov unittest1.c >> unittestresults.out
-	rm -rf *.gcov *.gcda *.gcno
 
 	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
 	./unittest2 >> unittestresults.out
 	gcov unittest2.c >> unittestresults.out
-	rm -rf *.gcov *.gcda *.gcno
 
 	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
 	./unittest3 >> unittestresults.out
 	gcov unittest3.c >> unittestresults.out
-	rm -rf *.gcov *.gcda *.gcno
 
 	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
 	./unittest4 >> unittestresults.out

@@ -11,18 +11,14 @@
  */
 int checkCardEffectGreatHall(int currentPlayer, struct gameState *state) {
     int handPos = 0;
-    int initialActions = state->numActions;
-    int initialCardCount = state->handCount[currentPlayer];
 
     // Execute Great Hall Card
     cardEffectGreatHall(handPos, currentPlayer, state);
 
-    int cardCount = initialCardCount + 1;
+    assert(state->numActions == 1); // should have one action after previous action
+    assert(state->handCount[currentPlayer] == 1);
 
-    assert(initialActions == 1); // should have one action after previous action
-    assert(initialActions == 1);// should have one action after discard
-
-    return cardCount;
+    return 0;
 }
 
 int main(int argc, char** argv) {
