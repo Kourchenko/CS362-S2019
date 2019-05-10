@@ -1,0 +1,3 @@
+module FinalProject {
+	requires junit;
+}
