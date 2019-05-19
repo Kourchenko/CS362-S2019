@@ -9,17 +9,21 @@ dominion.o: dominion.h dominion.c rngs.o
 playdom: dominion.o playdom.c
 	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
 
-randomtestcard1: gcc -0 randomtestcard1 -g randomtestcard1.c $(CFLAGS)
+randomtestcard1: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard1 &> randomtestcard1.out
+	echo "here....\n" >> randomtestcard1.out
 	gcov randomtestcard1.c >> randomtestcard1.out
 	cat randomtestcard1.c.gcov >> randomtestcard1.out
 
-randomtestcard2: gcc -0 randomtestcard2 -g randomtestcard2.c $(CFLAGS)
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard2 &> randomtestcard2.out
 	gcov randomtestcard2.c >> randomtestcard2.out
 	cat randomtestcard2.c.gcov >> randomtestcard2.out
 
-randomtestcard3: gcc -0 randomtestcard3 -g randomtestcard3.c $(CFLAGS)
+randomtestcard3: randomtestcard3.c dominion.o rngs.o
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard3 &> randomtestcard3.out
 	gcov randomtestcard3.c >> randomtestcard3.out
 	cat randomtestcard3.c.gcov >> randomtestcard3.out
