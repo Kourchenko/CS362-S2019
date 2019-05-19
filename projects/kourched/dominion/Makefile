@@ -24,13 +24,13 @@ randomtestcard3: gcc -0 randomtestcard3 -g randomtestcard3.c $(CFLAGS)
 	gcov randomtestcard3.c >> randomtestcard3.out
 	cat randomtestcard3.c.gcov >> randomtestcard3.out
 
-testAllRandomTestCard: randomtestcard1 randomtestcard2 randomtestcard3
-	echo "randomtestcard1.c.gcov" > randomtestcard.out
-	cat randomtestcard1.c.gcov >> randomtestcard.out
-	echo "randomtestcard2.c.gcov" >> randomtestcard.out
-	cat randomtestcard2.c.gcov >> randomtestcard.out
-	echo "randomtestcard3.c.gcov" >> randomtestcard.out
-	cat randomtestcard3.c.gcov >> randomtestcard.out
+testAllRandomTestCards: randomtestcard1 randomtestcard2 randomtestcard3
+	echo "randomtestcard1.c.gcov" > randomtestcardresults.out
+	cat randomtestcard1.c.gcov >> randomtestcardresults.out
+	echo "randomtestcard2.c.gcov" >> randomtestcardresults.out
+	cat randomtestcard2.c.gcov >> randomtestcardresults.out
+	echo "randomtestcard3.c.gcov" >> randomtestcardresults.out
+	cat randomtestcard3.c.gcov >> randomtestcardresults.out
 
 cleanrandomtestcards: rm -f *.o *.gcno *.out randomtestcard1 randomtestcard2 randomtestcard3
 
