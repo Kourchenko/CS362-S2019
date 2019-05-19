@@ -5,15 +5,13 @@
 
 char inputChar()
 {
-    srand(time(NULL));
-    int asciiMin = 32;
-    int asciiMax = 127;
+    int asciiMin = 32; // space
+    int asciiMax = 127; // DEL
     // Generate random value, ASCII Set 32 (SPACE) - 127 (DEL)
     int r = rand()%(asciiMax-asciiMin+1)+asciiMin;
 
     // Convert integer r to character c
     char c = r;
-
     return c;
 }
 
@@ -21,19 +19,18 @@ char *inputString()
 {
     // Generate random value between these integers
     int asciiMin = 101; // e
-    int asciiMax = 115; // s
+    int asciiMax = 116; // t
 
-    // "reset\0"
-    char* char_array = new char[6];
+    char* char_array = malloc(6*sizeof(char));
 
-    char null_terminator = '\0';
-
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
       int r = rand() % (asciiMax-asciiMin+1)+asciiMin;
       char c = r;
       char_array[i] = c;
     }
 
+    char_array[5] = '\0';
+    free(char_array);
     return char_array;
 }
 
