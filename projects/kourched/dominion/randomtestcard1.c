@@ -10,22 +10,24 @@ void RANDOM_TEST_CARD_ADVENTURER(struct gameState *state) {
     int randomDrawnTreasure;
     int randomDeckCount;
     int currentPlayer = 1;
-    
+    int test_state = 0;
     int iterations = 0;
     while (1) {
         iterations++;
+        printf("Iteration: %d\n", iterations);
         randomDrawnTreasure = rand() % 3;
         randomDeckCount = rand() % 10;
         cardEffectAdventurer(cardDrawn = 0, randomDrawnTreasure, currentPlayer, state);
 
         if (state->handCount[currentPlayer] == 0) {
-            printf("Iteration %d", iterations);
-            printf(" HandCount = 0 ");
-            exit(200);
+            printf(" HandCount = 0 \n");
+            test_state++;
         } else if (state->deckCount[currentPlayer] == randomDeckCount) {
-            printf("Iteration %d", iterations);
-            printf(" Random Deck Count = %d", randomDeckCount);
-            exit(200);
+            printf(" Random Deck Count = %d\n", randomDeckCount);
+            test_state++;
+        }
+        if (test_state >= 2 || iterations >= 200) {
+            break;
         }
     }
 }

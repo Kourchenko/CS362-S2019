@@ -28,15 +28,24 @@ randomtestcard3: randomtestcard3.c dominion.o rngs.o
 	gcov randomtestcard3.c >> randomtestcard3.out
 	cat randomtestcard3.c.gcov >> randomtestcard3.out
 
-testAllRandomTestCards: randomtestcard1 randomtestcard2 randomtestcard3
-	echo "randomtestcard1.c.gcov" > randomtestcardresults.out
+testAllRandom: dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 &> randomtestcardresults.out
+	gcov randomtestcard1.c >> randomtestcardresults.out
 	cat randomtestcard1.c.gcov >> randomtestcardresults.out
-	echo "randomtestcard2.c.gcov" >> randomtestcardresults.out
+
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestcardresults.out
+	gcov randomtestcard2.c >> randomtestcardresults.out
 	cat randomtestcard2.c.gcov >> randomtestcardresults.out
-	echo "randomtestcard3.c.gcov" >> randomtestcardresults.out
+
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard3 >> randomtestcardresults.out
+	gcov randomtestcard3.c >> randomtestcardresults.out
 	cat randomtestcard3.c.gcov >> randomtestcardresults.out
 
-cleanrandomtestcards: rm -f *.o *.gcno *.out randomtestcard1 randomtestcard2 randomtestcard3
+cleanRandomTestCards: 
+	rm -f *.o *.gcno *.c.gcov *.gcda *.out randomtestcard1 randomtestcard2 randomtestcard3
 
 #To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
 testDrawCard: testDrawCard.c dominion.o rngs.o

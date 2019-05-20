@@ -7,15 +7,16 @@
 
 void RANDOM_TEST_CARD_SMITHY(struct gameState *state) {
     int currentPlayer = 1;
-    int randomHandPos = rand() % numHandCards(&state);
-    int randomNumActions = rand() % 10;
+    int randomHandPos = rand() % 10;
     int cardDrawn;
-    
+    int iterations = 0;
     while (1) {
+        iterations++;
+        printf("Iteration: %d\n", iterations);
+
         cardEffectGreatHall(randomHandPos, currentPlayer, state);
         cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
-        if (state->numActions == randomNumActions && 
-            cardDrawn == adventurer ||
+        if (cardDrawn == adventurer ||
             cardDrawn == gardens ||
             cardDrawn == embargo ||
             cardDrawn == village ||
@@ -25,8 +26,8 @@ void RANDOM_TEST_CARD_SMITHY(struct gameState *state) {
             cardDrawn == sea_hag ||
             cardDrawn == tribute ||
             cardDrawn == smithy) {
-                print(" Card Drawn ");
-                exit(200);
+                printf(" Card Drawn \n");
+                break;
             }
     }
 }

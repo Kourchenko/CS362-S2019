@@ -7,43 +7,47 @@
 
 void RANDOM_TEST_CARD_SMITHY(struct gameState *state) {
     int currentPlayer = 1;
-    int randomHandPos = rand() % numHandCards(&state);
+    int randomHandPos = rand() % 10;
     int cardDrawn;
-    
+    int iterations = 0;
     while (1) {
+        iterations++;
+        printf("Iteration: %d\n", iterations);
+
         cardEffectSmithy(randomHandPos, currentPlayer, state);
+        drawCard(currentPlayer, state);
         cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];
 
         if (cardDrawn == smithy) {
-            print(" Drew Smithy: Top Card ");
-            exit(200);
+            printf(" Drew Smithy: Top Card ");
+            break;
         } else if (cardDrawn == adventurer) {
-            print (" Drew Adventurer: Top Card ");
-            exit(200);
+            printf(" Drew Adventurer: Top Card ");
+            break;
         } else if (cardDrawn == gardens) {
-            print(" Drew Gardens: Top Card ");
-            exit(200);
+            printf(" Drew Gardens: Top Card ");
+            break;
         } else if (cardDrawn == embargo) {
-            print(" Drew Embargo: Top Card ");
-            exit(200);
+            printf(" Drew Embargo: Top Card ");
+            break;
         } else if (cardDrawn == village) {
-            print (" Drew Village: Top Card ");
-            exit(200);
+            printf(" Drew Village: Top Card ");
+            break;
         } else if (cardDrawn == minion) {
-            print(" Drew Minion: Top Card ");
-            exit(200);
+            printf(" Drew Minion: Top Card ");
+            break;
         } else if (cardDrawn == mine) {
-            print(" Drew Mine: Top Card ");
-            exit(200);
+            printf(" Drew Mine: Top Card ");
+            break;
         } else if (cardDrawn == cutpurse) {
-            print (" Drew Cut Purse: Top Card ");
-            exit(200);
+            printf(" Drew Cut Purse: Top Card ");
+            break;
         } else if (cardDrawn == sea_hag) {
-            print(" Drew Sea Hag: Top Card ");
-            exit(200);
+            printf(" Drew Sea Hag: Top Card ");
+            break;
         } else if (cardDrawn == tribute) {
-            print(" Drew Tribute: Top Card ");
-            exit(200);
+            printf(" Drew Tribute: Top Card ");
+            break;
         }
     }
 }
