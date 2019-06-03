@@ -1,0 +1,112 @@
+CFLAGS= -Wall -fpic -coverage -lm -std=c99
+
+rngs.o: rngs.h rngs.c
+	gcc -c rngs.c -g  $(CFLAGS)
+
+dominion.o: dominion.h dominion.c rngs.o
+	gcc -c dominion.c -g  $(CFLAGS)
+
+playdom: dominion.o playdom.c
+	gcc -o playdom playdom.c -g dominion.o rngs.o $(CFLAGS)
+
+randomtestcard1: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 &> randomtestcard1.out
+	echo "here....\n" >> randomtestcard1.out
+	gcov randomtestcard1.c >> randomtestcard1.out
+	cat randomtestcard1.c.gcov >> randomtestcard1.out
+
+randomtestcard2: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 &> randomtestcard2.out
+	gcov randomtestcard2.c >> randomtestcard2.out
+	cat randomtestcard2.c.gcov >> randomtestcard2.out
+
+randomtestcard3: randomtestcard3.c dominion.o rngs.o
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard3 &> randomtestcard3.out
+	gcov randomtestcard3.c >> randomtestcard3.out
+	cat randomtestcard3.c.gcov >> randomtestcard3.out
+
+unittestresults: unittest1.c unittest2.c unittest3.c unittest4.c dominion.o rngs.o
+	gcc -o unittest1 -g unittest1.c dominion.o rngs.o $(CFLAGS)
+	echo "unittest1.c" > unittestresults.out
+	./unittest1 >> unittestresults.out
+	gcov unittest1.c >> unittestresults.out
+
+	gcc -o unittest2 -g unittest2.c dominion.o rngs.o $(CFLAGS)
+	./unittest2 >> unittestresults.out
+	gcov unittest2.c >> unittestresults.out
+
+	gcc -o unittest3 -g unittest3.c dominion.o rngs.o $(CFLAGS)
+	./unittest3 >> unittestresults.out
+	gcov unittest3.c >> unittestresults.out
+
+	gcc -o unittest4 -g unittest4.c dominion.o rngs.o $(CFLAGS)
+	./unittest4 >> unittestresults.out
+	gcov unittest4.c >> unittestresults.out
+
+	gcc -o cardTest1 -g cardTest1.c dominion.o rngs.o $(CFLAGS)
+	./cardTest1 >> unittestresults.out
+	gcov cardTest1.c >> unittestresults.out
+
+	gcc -o cardTest2 -g cardTest2.c dominion.o rngs.o $(CFLAGS)
+	./cardTest2 >> unittestresults.out
+	gcov cardTest2.c >> unittestresults.out
+
+	gcc -o cardTest3 -g cardTest3.c dominion.o rngs.o $(CFLAGS)
+	./cardTest3 >> unittestresults.out
+	gcov cardTest3.c >> unittestresults.out
+
+	gcc -o cardTest4 -g cardTest4.c dominion.o rngs.o $(CFLAGS)
+	./cardTest4 >> unittestresults.out
+	gcov cardTest4.c >> unittestresults.out
+	
+testAllRandom: dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 &> randomtestcardresults.out
+	gcov randomtestcard1.c >> randomtestcardresults.out
+	cat randomtestcard1.c.gcov >> randomtestcardresults.out
+
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 >> randomtestcardresults.out
+	gcov randomtestcard2.c >> randomtestcardresults.out
+	cat randomtestcard2.c.gcov >> randomtestcardresults.out
+
+	gcc -o randomtestcard3 -g randomtestcard3.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard3 >> randomtestcardresults.out
+	gcov randomtestcard3.c >> randomtestcardresults.out
+	cat randomtestcard3.c.gcov >> randomtestcardresults.out
+
+cleanRandomTestCards: 
+	rm -f *.o *.gcno *.c.gcov *.gcda *.out randomtestcard1 randomtestcard2 randomtestcard3
+
+#To run playdom you need to entere: ./playdom <any integer number> like ./playdom 10*/
+testDrawCard: testDrawCard.c dominion.o rngs.o
+	gcc  -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
+
+badTestDrawCard: badTestDrawCard.c dominion.o rngs.o
+	gcc -o badTestDrawCard -g  badTestDrawCard.c dominion.o rngs.o $(CFLAGS)
+
+testBuyCard: testDrawCard.c dominion.o rngs.o
+	gcc -o testDrawCard -g  testDrawCard.c dominion.o rngs.o $(CFLAGS)
+
+testAll: dominion.o testSuite.c
+	gcc -o testSuite testSuite.c -g  dominion.o rngs.o $(CFLAGS)
+
+interface.o: interface.h interface.c
+	gcc -c interface.c -g  $(CFLAGS)
+
+runtests: testDrawCard 
+	./testDrawCard &> unittestresult.out
+	gcov dominion.c >> unittestresult.out
+	cat dominion.c.gcov >> unittestresult.out
+
+
+player: player.c interface.o
+	gcc -o player player.c -g  dominion.o rngs.o interface.o $(CFLAGS)
+
+all: playdom player 
+
+clean:
+	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
